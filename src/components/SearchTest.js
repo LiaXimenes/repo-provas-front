@@ -1,28 +1,30 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import axios from 'axios'
 
-export default function HomePage(){
+export default function SearchTest(){
     return(
         <>
             <Header>
-                <p>Aqui a gente se ajuda a estudar aqui! Procure sua prova ou envie uma para ajudar os outres</p>
+                <p>Nessa página todos os outres vão te ajudar a estudar, então escolhe uma disciplina ou um professor para achar a prova que precisa</p>
             </Header>
-            
+
             <Body>
-                <Link to="/send-test">
+                <Link to="/search-teacher">
                     <GoTo>
-                        <p>Enviar Prova</p>
+                        <p>Professor</p>
                     </GoTo>
                 </Link>
-                <Link to="/search-test">
+                <Link to="/search-subject">
                     <GoTo>
-                        <p>Pesquisar Prova</p>
+                        <p>Disciplina</p>
                     </GoTo>
                 </Link>
             </Body>
-           
+            
         </>
     )
+    
 }
 
 const Header = styled.div`

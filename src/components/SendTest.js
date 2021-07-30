@@ -13,10 +13,13 @@ export default function SendTest(){
 
     function sendTestToServer(){
         const request = axios.post("http://localhost:4000/send-test", body)
-        request.then((response) => console.log("deu bom"));
+        request.then((response) => {console.log("deu bom"); alert("Sua prova foi enviada! Obrigada")});
         request.catch(errors)
 
         function errors(error){
+            setLink("")
+            setName("")
+            alert("Algo deu errado, tente novamente")
 
         }
     }
@@ -29,7 +32,7 @@ export default function SendTest(){
             </Header>
 
             <Body>
-                <form onSubmit={sendTestToServer}>
+                <form>
                     <p>Qual nome da prova? Pode ser o ano e semestre que foi aplicada</p>
                     <input type="text" placeholder="Ex: 2020.1" value={name} onChange={(e) => setName(e.target.value)} />
 
@@ -42,8 +45,9 @@ export default function SendTest(){
                     <p>Qual categoria ela se encaixa?</p>
                     <select></select>
 
-                    <p>Por último, mas não menos importante, coloca ai o link da prova (ela já tem que estár na nuvem)</p>
+                    <p>Por último, mas não menos importante, coloca ai o link da prova (ela já tem que estar na nuvem)</p>
                     <input type="text" placeholder="Link da prova, pleasinho" value={link} onChange={(e) => setLink(e.target.value)} />
+
                     <button onClick={sendTestToServer}>Enviar</button>
                 </form>
             </Body>
@@ -63,13 +67,45 @@ const Header = styled.div`
     p{
         color: white;
         font-family: 'Source Sans Pro', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
     }
 ` ;
 
 const Body = styled.div`
     width: 100%;
-    height: 500px;
+    height: 400px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
+    p{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 20px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    select{
+        width: 200px;
+    }
+
+    input{
+        width: 500px;
+        height: 30px;
+    }
+
+    button{
+        width: 150px;
+        height: 40px;
+        background: #171717;
+        border-radius: 5px;
+        color:white;
+        margin-left: 50px;
+
+        :hover{
+            cursor: pointer;
+        }
+    }
 `;

@@ -5,7 +5,7 @@ export default function HomePage(){
     return(
         <>
             <Header>
-                <p>Aqui a gente se ajuda a estudar aqui! Procure sua prova ou envie uma para ajudar os outres</p>
+                <p>Aqui a gente se ajuda a estudar! Procure sua prova ou envie uma para ajudar os outres</p>
             </Header>
             
             <Body>
@@ -36,6 +36,8 @@ const Header = styled.div`
     p{
         color: white;
         font-family: 'Source Sans Pro', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
     }
 ` ;
 

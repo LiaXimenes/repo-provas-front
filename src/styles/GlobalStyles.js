@@ -52,6 +52,12 @@ const GlobalStyles = createGlobalStyle`
     a{
         text-decoration: none;
     }
+    button{
+        border-style: none;
+    }
+    input{
+        border-style: none;
+    }
 `;
 
 export default GlobalStyles;

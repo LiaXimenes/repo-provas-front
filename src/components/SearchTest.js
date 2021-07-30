@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import axios from 'axios'
 
 export default function SearchTest(){
     return(
@@ -38,6 +37,8 @@ const Header = styled.div`
     p{
         color: white;
         font-family: 'Source Sans Pro', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
     }
 ` ;
 

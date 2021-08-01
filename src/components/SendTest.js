@@ -1,25 +1,66 @@
 import styled from "styled-components";
 import axios from 'axios'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SendTest(){
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
+    const [chosenSubject, setChosenSubject] =  useState("");
+    const [chosenCategory, setChosenCategory] = useState("");
+    const [chosenTeacher, setChosenTeacher] = useState("");
+
+    const [subjects, setSubjects] = useState([]);
+    const [teachers, setTeachers] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const request = axios.get("http://localhost:4000/search-test/subject");
+        request.then((response) => {console.log(response.data); setSubjects(response.data)});
+        request.catch(errors)
+
+        function errors(error){
+            
+        }
+    },[])
+
 
     const body = {
         name,
+        chosenSubject,
+        chosenTeacher,
+        chosenCategory,
         link
     }
 
     function sendTestToServer(){
         const request = axios.post("http://localhost:4000/send-test", body)
-        request.then((response) => {console.log("deu bom"); alert("Sua prova foi enviada! Obrigada")});
+        request.then((response) => alert("Sua prova foi enviada! Obrigada"));
         request.catch(errors)
 
         function errors(error){
             setLink("")
             setName("")
             alert("Algo deu errado, tente novamente")
+
+        }
+    }
+
+    function findTeacherBySubjectId(id){
+        const request = axios.get(`http://localhost:4000/search-test/teacher-subject/${id}`);
+        request.then((response) => {console.log(response.data); setTeachers(response.data)});
+        request.catch(errors)
+
+        function errors(error){
+
+        }
+    }
+
+    function getCategories(){
+        const request = axios.get("http://localhost:4000/search-test/category");
+        request.then((response) => {console.log(response.data); setCategories(response.data)});
+        request.catch(errors)
+
+        function errors(error){
 
         }
     }
@@ -37,13 +78,37 @@ export default function SendTest(){
                     <input type="text" placeholder="Ex: 2020.1" value={name} onChange={(e) => setName(e.target.value)} />
 
                     <p>Escolha a disciplina que quer enviar a prova</p>
-                    <select></select>
+                    <select onChange={(e) => {setChosenSubject(e.target.value); findTeacherBySubjectId(e.target.value)}}>
+                        {subjects.map((subject) => {
+                             return(
+                                <option value={subject.id}>
+                                    {subject.name}
+                                </option>
+                            )
+                        })}
+                    </select>
 
                     <p>Agora, o professor</p>
-                    <select></select>
+                    <select onChange={(e) => {setChosenTeacher(e.target.value); getCategories()}}>
+                        {teachers.map((teacher) => {
+                             return(
+                                <option value={teacher.id}>
+                                    {teacher.teacher.name}
+                                </option>
+                            )
+                        })}
+                    </select>
 
                     <p>Qual categoria ela se encaixa?</p>
-                    <select></select>
+                    <select onChange={(e) => {setChosenCategory(e.target.value)}}>
+                        {categories.map((category) => {
+                             return(
+                                <option value={category.id}>
+                                    {category.name}
+                                </option>
+                            )
+                        })}
+                    </select>
 
                     <p>Por último, mas não menos importante, coloca ai o link da prova (ela já tem que estar na nuvem)</p>
                     <input type="text" placeholder="Link da prova, pleasinho" value={link} onChange={(e) => setLink(e.target.value)} />

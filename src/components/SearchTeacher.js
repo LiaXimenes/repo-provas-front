@@ -24,14 +24,14 @@ export default function SearchTeacher(){
     useEffect(() => {
         for(let i = 0; i < tests.length; i++){
             if(tests[i].categoryId === 1){
-                setP1([...p1, tests[i]]) 
+                setP1(p1 => [...p1, tests[i]]) 
             } else if(tests[i].categoryId === 2){
-                setP2([...p2, tests[i]]) 
+                setP2(p2 => [...p2, tests[i]]) 
             } else if(tests[i].categoryId === 3){
-                setP3([...p3, tests[i]]) 
+                setP3(p3 => [...p3, tests[i]]) 
             } else if(tests[i].categoryId === 4){
-                setSegChamada([...segChamada, tests[i]]) 
-            } else{setOutras([...outras, tests[i]])}
+                setSegChamada(segChamada => [...segChamada, tests[i]]) 
+            } else{setOutras(outras => [...outras, tests[i]])}
         }
     }, [tests])
 

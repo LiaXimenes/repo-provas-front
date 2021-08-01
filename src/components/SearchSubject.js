@@ -23,25 +23,23 @@ export default function SearchSubject(){
 
     useEffect(() => {
         for(let i = 0; i < subjects.length; i++){
-            if(subjects[i].semesterId === 1){
-                setSem1([...sem1, subjects[i]])
-            } else if(subjects[i].semesterId === 2){
-                setSem2([...sem2, subjects[i]])
-            } else if(subjects[i].semesterId === 3){
-                setSem3([...sem3, subjects[i]])
-            } else if(subjects[i].semesterId === 4){
-                setSem4([...sem4, subjects[i]])
-            } else if(subjects[i].semesterId === 5){
-                setSem5([...sem5, subjects[i]])
-            } else if(subjects[i].semesterId === 6){
-                setSem6([...sem6, subjects[i]])
-            } else if(subjects[i].semesterId === 7){
-                setSem7([...sem7, subjects[i]])
+            if(subjects[i].semester.id === 1){
+                setSem1(sem1 => [...sem1, subjects[i]])
+            } else if(subjects[i].semester.id === 2){
+                setSem2(sem2 => [...sem2, subjects[i]])
+            } else if(subjects[i].semester.id === 3){
+                setSem3(sem3 => [...sem3, subjects[i]])
+            } else if(subjects[i].semester.id === 4){
+                setSem4(sem4 => [...sem4, subjects[i]])
+            } else if(subjects[i].semester.id === 5){
+                setSem5(sem5 => [...sem5, subjects[i]])
+            } else if(subjects[i].semester.id === 6){
+                setSem6(sem6 => [...sem6, subjects[i]])
+            } else if(subjects[i].semester.id === 7){
+                setSem7(sem7 => [...sem7, subjects[i]])
             } else{
-                setSem8([...sem8, subjects[i]])
+                setSem8(sem8 => [...sem8, subjects[i]])
             }
-
-            console.log(sem1)
         }
     }, [subjects])
 
@@ -58,14 +56,14 @@ export default function SearchSubject(){
     useEffect(() => {
         for(let i = 0; i < tests.length; i++){
             if(tests[i].categoryId === 1){
-                setP1([...p1, tests[i]]) 
+                setP1(p1 => [...p1, tests[i]]) 
             } else if(tests[i].categoryId === 2){
-                setP2([...p2, tests[i]]) 
+                setP2(p2 => [...p2, tests[i]]) 
             } else if(tests[i].categoryId === 3){
-                setP3([...p3, tests[i]]) 
+                setP3(p3 => [...p3, tests[i]]) 
             } else if(tests[i].categoryId === 4){
-                setSegChamada([...segChamada, tests[i]]) 
-            } else{setOutras([...outras, tests[i]])}
+                setSegChamada(segChamada => [...segChamada, tests[i]]) 
+            } else{setOutras(outras => [...outras, tests[i]])}
         }
     }, [tests])
 
@@ -94,13 +92,91 @@ export default function SearchSubject(){
 
             <Body>
                 <List>
-                    {subjects.map((subject) => {
-                        return(
-                            <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
-                                {subject.name}
-                            </EachOption>
-                        )
-                    })}
+                    <Category>
+                        <p>Primeiro Semestre</p>
+                            {sem1.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+
+                    <Category>
+                        <p>Segundo Semestre</p>
+                            {sem2.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+
+                    <Category>
+                        <p>Terceiro Semestre</p>
+                            {sem3.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+
+                    <Category>
+                        <p>Quarto Semestre</p>
+                            {sem4.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+
+                    <Category>
+                        <p>Quinto Semestre</p>
+                            {sem5.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+
+                    <Category>
+                        <p>Sexto Semestre</p>
+                            {sem6.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+                    <Category>
+                        <p>Setimo Semestre</p>
+                            {sem7.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
+                    <Category>
+                        <p>Oitavo Semestre</p>
+                            {sem8.map((subject) => {
+                                return(
+                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                        {subject.name}
+                                    </EachOption>
+                                )
+                            })}
+                    </Category>
                 </List>
 
                 

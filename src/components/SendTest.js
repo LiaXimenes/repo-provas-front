@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from 'axios'
 import { useEffect, useState } from "react";
+import {useHistory} from "react-router-dom";
 
 export default function SendTest(){
     const [name, setName] = useState("");
@@ -13,6 +14,8 @@ export default function SendTest(){
     const [teachers, setTeachers] = useState([]);
     const [categories, setCategories] = useState([]);
 
+    const history = useHistory();
+
     useEffect(() => {
         const request = axios.get("http://localhost:4000/search-test/subject");
         request.then((response) => {console.log(response.data); setSubjects(response.data)});
@@ -23,23 +26,27 @@ export default function SendTest(){
         }
     },[])
 
-
-    const body = {
-        name,
-        chosenSubject,
-        chosenTeacher,
-        chosenCategory,
-        link
-    }
-
     function sendTestToServer(){
+        const body = {
+            name,
+            subjectId: chosenSubject ,
+            teacherId: chosenTeacher,
+            categoryId: chosenCategory,
+            link
+        }
+
+        console.log(body)
         const request = axios.post("http://localhost:4000/send-test", body)
-        request.then((response) => alert("Sua prova foi enviada! Obrigada"));
+        request.then((response) => {alert("Sua prova foi enviada! Obrigada"); history.push("/")});
         request.catch(errors)
 
         function errors(error){
-            setLink("")
-            setName("")
+            setLink("");
+            setName("");
+            setChosenCategory("");
+            setChosenSubject("");
+            setChosenTeacher("");
+
             alert("Algo deu errado, tente novamente")
 
         }
@@ -79,6 +86,7 @@ export default function SendTest(){
 
                     <p>Escolha a disciplina que quer enviar a prova</p>
                     <select onChange={(e) => {setChosenSubject(e.target.value); findTeacherBySubjectId(e.target.value)}}>
+                        <option></option>
                         {subjects.map((subject) => {
                              return(
                                 <option value={subject.id}>
@@ -90,9 +98,10 @@ export default function SendTest(){
 
                     <p>Agora, o professor</p>
                     <select onChange={(e) => {setChosenTeacher(e.target.value); getCategories()}}>
+                        <option></option>
                         {teachers.map((teacher) => {
                              return(
-                                <option value={teacher.id}>
+                                <option value={teacher.teacherId}>
                                     {teacher.teacher.name}
                                 </option>
                             )
@@ -101,6 +110,7 @@ export default function SendTest(){
 
                     <p>Qual categoria ela se encaixa?</p>
                     <select onChange={(e) => {setChosenCategory(e.target.value)}}>
+                        <option></option>
                         {categories.map((category) => {
                              return(
                                 <option value={category.id}>

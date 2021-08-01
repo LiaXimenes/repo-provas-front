@@ -272,11 +272,11 @@ const Header = styled.div`
 
 const Body = styled.div`
     display: flex;
+    margin-top: 30px;
 `;
 
 const List = styled.div`
     width: 50%;
-    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -285,11 +285,12 @@ const List = styled.div`
 
 const Category = styled.div`
     width: 50%;
+    margin-bottom: 10px;
 `;
 
 const EachOption = styled.button` 
     background: white;
-    margin: 10px;
+    margin: 7px;
     :hover{
         cursor: pointer;
     }

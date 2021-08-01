@@ -13,7 +13,7 @@ export default function SearchTeacher(){
 
     useEffect(() => {
         const request = axios.get("http://localhost:4000/search-test/teacher");
-        request.then((response) => {console.log(response.data); setTeachers(response.data)});
+        request.then((response) => {setTeachers(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -43,7 +43,7 @@ export default function SearchTeacher(){
         setOutras([]);
 
         const request = axios.get(`http://localhost:4000/search-test/teacher/${id}`);
-        request.then((response) => {console.log(response.data); setTests(response.data)});
+        request.then((response) => {setTests(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -160,6 +160,7 @@ const Header = styled.div`
 
 const Body = styled.div`
     display: flex;
+    margin-top: 30px;
 `;
 
 const List = styled.div`

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import {useHistory} from "react-router-dom";
+import {api} from "../services/api";
 
 export default function SendTest(){
     const [name, setName] = useState("");
@@ -17,7 +18,7 @@ export default function SendTest(){
     const history = useHistory();
 
     useEffect(() => {
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject`);
+        const request = api.get(`/search-test/subject`)
         request.then((response) => {console.log(response.data); setSubjects(response.data)});
         request.catch(errors)
 
@@ -46,7 +47,7 @@ export default function SendTest(){
             link
         }
 
-        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/send-test`, body)
+        const request = api.post(`/send-test`, body)
         request.then((response) => {alert("Sua prova foi enviada! Obrigada"); history.push("/")});
         request.catch(errors)
 
@@ -63,7 +64,7 @@ export default function SendTest(){
     }
 
     function findTeacherBySubjectId(id){
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher-subject/${id}`);
+        const request = api.get(`/search-test/teacher-subject/${id}`);
         request.then((response) => {console.log(response.data); setTeachers(response.data)});
         request.catch(errors)
 
@@ -73,7 +74,7 @@ export default function SendTest(){
     }
 
     function getCategories(){
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/category`);
+        const request = api.get(`/search-test/category`);
         request.then((response) => {console.log(response.data); setCategories(response.data)});
         request.catch(errors)
 

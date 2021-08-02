@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import axios from 'axios'
 import { useEffect, useState } from "react";
+import {api} from "../services/api";
 
 export default function SearchSubject(){
     const [subjects, setSubjects] = useState([]);
@@ -44,7 +44,7 @@ export default function SearchSubject(){
     }, [subjects])
 
     useEffect(() => {
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject`);
+        const request = api.get(`/search-test/subject`);
         request.then((response) => {console.log(response.data); setSubjects(response.data)});
         request.catch(errors)
 
@@ -74,7 +74,7 @@ export default function SearchSubject(){
         setSegChamada([]);
         setOutras([]);
 
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject/${id}`);
+        const request = api.get(`/search-test/subject/${id}`);
         request.then((response) => {console.log(response.data); setTests(response.data)});
         request.catch(errors)
 

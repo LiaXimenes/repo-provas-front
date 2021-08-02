@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import axios from 'axios'
 import { useEffect, useState } from "react";
+import {api} from "../services/api";
 
 export default function SearchTeacher(){
     const [teachers, setTeachers] = useState([]);
@@ -12,7 +12,7 @@ export default function SearchTeacher(){
     const [outras, setOutras] = useState([]);
 
     useEffect(() => {
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher`);
+        const request = api.get(`/search-test/teacher`);
         request.then((response) => {console.log(response.data); setTeachers(response.data)});
         request.catch(errors)
 
@@ -42,7 +42,7 @@ export default function SearchTeacher(){
         setSegChamada([]);
         setOutras([]);
 
-        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher/${id}`);
+        const request = api.get(`/search-test/teacher/${id}`);
         request.then((response) => {setTests(response.data)});
         request.catch(errors)
 

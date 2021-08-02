@@ -17,7 +17,7 @@ export default function SendTest(){
     const history = useHistory();
 
     useEffect(() => {
-        const request = axios.get("http://localhost:4000/search-test/subject");
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject`);
         request.then((response) => {console.log(response.data); setSubjects(response.data)});
         request.catch(errors)
 
@@ -46,7 +46,7 @@ export default function SendTest(){
             link
         }
 
-        const request = axios.post("http://localhost:4000/send-test", body)
+        const request = axios.post(`${process.env.REACT_APP_API_BASE_URL}/send-test`, body)
         request.then((response) => {alert("Sua prova foi enviada! Obrigada"); history.push("/")});
         request.catch(errors)
 
@@ -63,7 +63,7 @@ export default function SendTest(){
     }
 
     function findTeacherBySubjectId(id){
-        const request = axios.get(`http://localhost:4000/search-test/teacher-subject/${id}`);
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher-subject/${id}`);
         request.then((response) => {console.log(response.data); setTeachers(response.data)});
         request.catch(errors)
 
@@ -73,7 +73,7 @@ export default function SendTest(){
     }
 
     function getCategories(){
-        const request = axios.get("http://localhost:4000/search-test/category");
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/category`);
         request.then((response) => {console.log(response.data); setCategories(response.data)});
         request.catch(errors)
 

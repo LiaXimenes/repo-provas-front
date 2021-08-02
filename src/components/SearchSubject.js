@@ -44,7 +44,7 @@ export default function SearchSubject(){
     }, [subjects])
 
     useEffect(() => {
-        const request = axios.get("http://localhost:4000/search-test/subject");
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject`);
         request.then((response) => {console.log(response.data); setSubjects(response.data)});
         request.catch(errors)
 
@@ -74,7 +74,7 @@ export default function SearchSubject(){
         setSegChamada([]);
         setOutras([]);
 
-        const request = axios.get(`http://localhost:4000/search-test/subject/${id}`);
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/subject/${id}`);
         request.then((response) => {console.log(response.data); setTests(response.data)});
         request.catch(errors)
 

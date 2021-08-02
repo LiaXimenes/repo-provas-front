@@ -12,7 +12,7 @@ export default function SearchTeacher(){
     const [outras, setOutras] = useState([]);
 
     useEffect(() => {
-        const request = axios.get("http://localhost:4000/search-test/teacher");
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher`);
         request.then((response) => {console.log(response.data); setTeachers(response.data)});
         request.catch(errors)
 
@@ -42,7 +42,7 @@ export default function SearchTeacher(){
         setSegChamada([]);
         setOutras([]);
 
-        const request = axios.get(`http://localhost:4000/search-test/teacher/${id}`);
+        const request = axios.get(`${process.env.REACT_APP_API_BASE_URL}/search-test/teacher/${id}`);
         request.then((response) => {setTests(response.data)});
         request.catch(errors)
 

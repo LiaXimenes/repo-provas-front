@@ -27,6 +27,17 @@ export default function SendTest(){
     },[])
 
     function sendTestToServer(){
+        if(!name || !chosenSubject || !chosenTeacher || !chosenCategory || !link){
+            setLink("");
+            setName("");
+            setChosenCategory("");
+            setChosenSubject("");
+            setChosenTeacher("");
+
+            alert("Algo deu errado, tente novamente");
+            return;
+        }
+
         const body = {
             name,
             subjectId: chosenSubject ,
@@ -35,7 +46,6 @@ export default function SendTest(){
             link
         }
 
-        console.log(body)
         const request = axios.post("http://localhost:4000/send-test", body)
         request.then((response) => {alert("Sua prova foi enviada! Obrigada"); history.push("/")});
         request.catch(errors)

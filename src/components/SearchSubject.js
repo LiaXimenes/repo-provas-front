@@ -83,6 +83,12 @@ export default function SearchSubject(){
         }
     }
 
+    function openTest(url){
+        console.log(url)
+        const newWindow = window.open(url, '_blank')
+        if (newWindow) newWindow.opener = null
+    }
+
 
     return(
         <>
@@ -187,8 +193,9 @@ export default function SearchSubject(){
                                 <p>P1</p>
                                 {p1.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
-                                    Prova: {test.name}
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                        <p>Prova: {test.name}</p>
+                                        <p>Professor: {test.teacher.name}</p>
                                     </EachOption>
                                 )
                                 })}
@@ -200,8 +207,9 @@ export default function SearchSubject(){
                                 <p>P2</p>
                                 {p2.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
-                                    Prova: {test.name}
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                        <p>Prova: {test.name}</p>
+                                        <p>Professor: {test.teacher.name}</p>
                                     </EachOption>
                                 )
                                 })}
@@ -213,8 +221,9 @@ export default function SearchSubject(){
                                 <p>P3</p>
                                 {p3.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
-                                    Prova: {test.name}
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                        <p>Prova: {test.name}</p>
+                                        <p>Professor: {test.teacher.name}</p>
                                     </EachOption>
                                 )
                                 })}
@@ -226,8 +235,9 @@ export default function SearchSubject(){
                                 <p>Segunda Chamada</p>
                                 {segChamada.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
-                                    Prova: {test.name}
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                        <p>Prova: {test.name}</p>
+                                        <p>Professor: {test.teacher.name}</p>
                                     </EachOption>
                                 )
                                 })}
@@ -236,11 +246,12 @@ export default function SearchSubject(){
 
                         {outras.length === 0 ? "" : 
                             <Category>
-                                <p>P3</p>
+                                <p>Outras</p>
                                 {outras.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
-                                    Prova: {test.name}
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                        <p>Prova: {test.name}</p>
+                                        <p>Professor: {test.teacher.name}</p>
                                     </EachOption>
                                 )
                                 })}

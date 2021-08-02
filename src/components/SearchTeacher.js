@@ -13,7 +13,7 @@ export default function SearchTeacher(){
 
     useEffect(() => {
         const request = axios.get("http://localhost:4000/search-test/teacher");
-        request.then((response) => {setTeachers(response.data)});
+        request.then((response) => {console.log(response.data); setTeachers(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -51,6 +51,12 @@ export default function SearchTeacher(){
         }
     }
 
+    function openTest(url){
+        console.log(url)
+        const newWindow = window.open(url, '_blank')
+        if (newWindow) newWindow.opener = null
+    }
+
     return(
         <>
             <Header>
@@ -75,7 +81,7 @@ export default function SearchTeacher(){
                                 <p>P1</p>
                                 {p1.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)} >
                                     Prova: {test.name}
                                     </EachOption>
                                 )
@@ -88,7 +94,7 @@ export default function SearchTeacher(){
                                 <p>P2</p>
                                 {p2.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
                                     </EachOption>
                                 )
@@ -101,7 +107,7 @@ export default function SearchTeacher(){
                                 <p>P3</p>
                                 {p3.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
                                     </EachOption>
                                 )
@@ -114,7 +120,7 @@ export default function SearchTeacher(){
                                 <p>Segunda Chamada</p>
                                 {segChamada.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
                                     </EachOption>
                                 )
@@ -127,7 +133,7 @@ export default function SearchTeacher(){
                                 <p>P3</p>
                                 {outras.map((test) => {
                                 return(
-                                    <EachOption id={test.id}>
+                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
                                     </EachOption>
                                 )

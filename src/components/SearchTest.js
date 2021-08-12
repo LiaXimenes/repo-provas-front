@@ -5,7 +5,10 @@ export default function SearchTest(){
     return(
         <>
             <Header>
-                <p>Nessa página todos os outres vão te ajudar a estudar, então escolhe uma disciplina ou um professor para achar a prova que precisa</p>
+                <Link to="/">
+                  <Title>RepoProvas</Title> 
+                </Link>
+                <p>Nessa página os outres vão te ajudar, escolha uma disciplina ou um professor para achar a prova que precisa</p>
             </Header>
 
             <Body>
@@ -42,6 +45,22 @@ const Header = styled.div`
     }
 ` ;
 
+const Title = styled.div`
+    font-family: 'Major Mono Display', monospace;
+    color:white;
+    font-size: 25px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    margin-left: 10px;
+    margin-top: 38px;
+
+    :hover{
+        cursor: pointer;
+        color: #FFD523;
+    }
+`;
+
 const Body = styled.div`
     height: 500px;
     display: flex;
@@ -56,9 +75,14 @@ const GoTo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 
-    p{
-        color: white;
+    :hover{
+        background: #171717;
+        color: #FFD523;
     }
-
-`
+`;

@@ -55,9 +55,6 @@ const GlobalStyles = createGlobalStyle`
     button{
         border-style: none;
     }
-    input{
-        border-style: none;
-    }
 `;
 
 export default GlobalStyles;

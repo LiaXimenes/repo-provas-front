@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import {useHistory} from "react-router-dom";
 import {api} from "../services/api";
+import {Link} from "react-router-dom";
 
 export default function SendTest(){
     const [name, setName] = useState("");
@@ -18,7 +19,7 @@ export default function SendTest(){
 
     useEffect(() => {
         const request = api.get(`/search-test/subject`)
-        request.then((response) => {console.log(response.data); setSubjects(response.data)});
+        request.then((response) => {setSubjects(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -64,7 +65,7 @@ export default function SendTest(){
 
     function findTeacherBySubjectId(id){
         const request = api.get(`/search-test/teacher-subject/${id}`);
-        request.then((response) => {console.log(response.data); setTeachers(response.data)});
+        request.then((response) => {setTeachers(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -74,7 +75,7 @@ export default function SendTest(){
 
     function getCategories(){
         const request = api.get(`/search-test/category`);
-        request.then((response) => {console.log(response.data); setCategories(response.data)});
+        request.then((response) => {setCategories(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -86,6 +87,9 @@ export default function SendTest(){
     return(
         <>
             <Header>
+                <Link to="/">
+                  <Title>RepoProvas</Title> 
+                </Link>
                 <p>Nessa página você pode ajudar os outres a estudar, então envia a prova ai embaixo</p>
             </Header>
 
@@ -157,6 +161,22 @@ const Header = styled.div`
     }
 ` ;
 
+const Title = styled.div`
+    font-family: 'Major Mono Display', monospace;
+    color:white;
+    font-size: 25px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    margin-left: 10px;
+    margin-top: 38px;
+
+    :hover{
+        cursor: pointer;
+        color: #FFD523;
+    }
+`;
+
 const Body = styled.div`
     width: 100%;
     height: 400px;
@@ -184,13 +204,18 @@ const Body = styled.div`
     button{
         width: 150px;
         height: 40px;
-        background: #171717;
+        background: #2B2B2B;
         border-radius: 5px;
         color:white;
         margin-left: 50px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 17px;
+        font-weight: bold;
 
         :hover{
             cursor: pointer;
+            background: #171717;
+            color: #FFD523;
         }
     }
 `;

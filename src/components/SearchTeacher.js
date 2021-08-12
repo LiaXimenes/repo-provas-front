@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import {api} from "../services/api";
+import {Link} from "react-router-dom";
 
 export default function SearchTeacher(){
     const [teachers, setTeachers] = useState([]);
@@ -11,9 +12,10 @@ export default function SearchTeacher(){
     const [segChamada, setSegChamada] = useState([]);
     const [outras, setOutras] = useState([]);
 
+
     useEffect(() => {
         const request = api.get(`/search-test/teacher`);
-        request.then((response) => {console.log(response.data); setTeachers(response.data)});
+        request.then((response) => {setTeachers(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -60,6 +62,9 @@ export default function SearchTeacher(){
     return(
         <>
             <Header>
+                <Link to="/">
+                  <Title>RepoProvas</Title> 
+                </Link>
                 <p>Nessa página tem todos os professores, escolhe um que mostraremos as provas que temos</p>
             </Header>
 
@@ -67,9 +72,9 @@ export default function SearchTeacher(){
                 <List>
                     {teachers.map((teacher) => {
                         return (
-                        <EachOption id={teacher.id} onClick={() => findTestByTeacherId(teacher.id)}>
+                        <EachTeacher id={teacher.id} onClick={() => findTestByTeacherId(teacher.id)}>
                             {teacher.name}
-                        </EachOption>
+                        </EachTeacher>
                         )
                     })}
                 </List>
@@ -78,12 +83,12 @@ export default function SearchTeacher(){
                     <List>
                         {p1.length === 0 ? <p>Não temos nenhuma P1 :(</p> : 
                             <Category>
-                                <p>P1</p>
+                                <h1>P1</h1>
                                 {p1.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)} >
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)} >
                                     Prova: {test.name}
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -91,12 +96,12 @@ export default function SearchTeacher(){
 
                         {p2.length === 0 ? <p>Não temos nenhuma P2 :(</p> : 
                             <Category>
-                                <p>P2</p>
+                                <h1>P2</h1>
                                 {p2.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -104,12 +109,12 @@ export default function SearchTeacher(){
 
                         {p3.length === 0 ? <p>Não temos nenhuma P3 :(</p> : 
                             <Category>
-                                <p>P3</p>
+                                <h1>P3</h1>
                                 {p3.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -117,12 +122,12 @@ export default function SearchTeacher(){
 
                         {segChamada.length === 0 ? "" : 
                             <Category>
-                                <p>Segunda Chamada</p>
+                                <h1>Segunda Chamada</h1>
                                 {segChamada.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -130,12 +135,12 @@ export default function SearchTeacher(){
 
                         {outras.length === 0 ? "" : 
                             <Category>
-                                <p>P3</p>
+                                <h1>P3</h1>
                                 {outras.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                     Prova: {test.name}
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -164,6 +169,22 @@ const Header = styled.div`
     }
 ` ;
 
+const Title = styled.div`
+    font-family: 'Major Mono Display', monospace;
+    color:white;
+    font-size: 25px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    margin-left: 10px;
+    margin-top: 38px;
+
+    :hover{
+        cursor: pointer;
+        color: #FFD523;
+    }
+`;
+
 const Body = styled.div`
     display: flex;
     margin-top: 30px;
@@ -175,16 +196,49 @@ const List = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
+    p{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 20px;
+    }
 `;
 
 const Category = styled.div`
     width: 50%;
+
+    h1{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 25px;
+    }
 `;
 
-const EachOption = styled.button` 
-    background: white;
+const EachTeacher = styled.button` 
+    width: 200px;
+    height: 25px;
+    background: #2B2B2B;
+    color: white;
     margin: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+
     :hover{
         cursor: pointer;
+        background: #171717;
+        color: #FFD523;
     }
 ` ;
+
+const EachTest = styled.button`
+    width: 200px;
+    height: 50px;
+    margin-top: 10px;
+    background: #2B2B2B;
+    color: white;
+    border-radius: 5px;
+
+    :hover{
+        cursor: pointer;
+        background: #171717;
+        color: #FFD523;
+    }
+`;

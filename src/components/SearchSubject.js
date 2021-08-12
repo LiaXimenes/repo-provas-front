@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import {api} from "../services/api";
+import {Link} from "react-router-dom";
 
 export default function SearchSubject(){
     const [subjects, setSubjects] = useState([]);
@@ -45,7 +46,7 @@ export default function SearchSubject(){
 
     useEffect(() => {
         const request = api.get(`/search-test/subject`);
-        request.then((response) => {console.log(response.data); setSubjects(response.data)});
+        request.then((response) => {setSubjects(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -75,7 +76,7 @@ export default function SearchSubject(){
         setOutras([]);
 
         const request = api.get(`/search-test/subject/${id}`);
-        request.then((response) => {console.log(response.data); setTests(response.data)});
+        request.then((response) => {setTests(response.data)});
         request.catch(errors)
 
         function errors(error){
@@ -93,93 +94,96 @@ export default function SearchSubject(){
     return(
         <>
             <Header>
+                <Link to="/">
+                  <Title>RepoProvas</Title> 
+                </Link>
                 <p>Nessa página temos todas as disciplinas, escolhe uma que mostraremos as provas que temos</p>
             </Header>
 
             <Body>
                 <List>
                     <Category>
-                        <p>Primeiro Semestre</p>
+                        <h1>Primeiro Semestre</h1>
                             {sem1.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
 
                     <Category>
-                        <p>Segundo Semestre</p>
+                        <h1>Segundo Semestre</h1>
                             {sem2.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
 
                     <Category>
-                        <p>Terceiro Semestre</p>
+                        <h1>Terceiro Semestre</h1>
                             {sem3.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
 
                     <Category>
-                        <p>Quarto Semestre</p>
+                        <h1>Quarto Semestre</h1>
                             {sem4.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
 
                     <Category>
-                        <p>Quinto Semestre</p>
+                        <h1>Quinto Semestre</h1>
                             {sem5.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
 
                     <Category>
-                        <p>Sexto Semestre</p>
+                        <h1>Sexto Semestre</h1>
                             {sem6.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
                     <Category>
-                        <p>Setimo Semestre</p>
+                        <h1>Setimo Semestre</h1>
                             {sem7.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
                     <Category>
-                        <p>Oitavo Semestre</p>
+                        <h1>Oitavo Semestre</h1>
                             {sem8.map((subject) => {
                                 return(
-                                    <EachOption id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
+                                    <EachDiscipline id={subject.id} onClick={() => findTestBySubjectId(subject.id)}>
                                         {subject.name}
-                                    </EachOption>
+                                    </EachDiscipline>
                                 )
                             })}
                     </Category>
@@ -190,13 +194,13 @@ export default function SearchSubject(){
                     <List>
                         {p1.length === 0 ? <p>Não temos nenhuma P1 :(</p> : 
                             <Category>
-                                <p>P1</p>
+                                <h1>P1</h1>
                                 {p1.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                         <p>Prova: {test.name}</p>
                                         <p>Professor: {test.teacher.name}</p>
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -204,13 +208,13 @@ export default function SearchSubject(){
 
                         {p2.length === 0 ? <p>Não temos nenhuma P2 :(</p> : 
                             <Category>
-                                <p>P2</p>
+                                <h1>P2</h1>
                                 {p2.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                         <p>Prova: {test.name}</p>
                                         <p>Professor: {test.teacher.name}</p>
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -218,13 +222,13 @@ export default function SearchSubject(){
 
                         {p3.length === 0 ? <p>Não temos nenhuma P3 :(</p> : 
                             <Category>
-                                <p>P3</p>
+                                <h1>P3</h1>
                                 {p3.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                         <p>Prova: {test.name}</p>
                                         <p>Professor: {test.teacher.name}</p>
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -232,13 +236,13 @@ export default function SearchSubject(){
 
                         {segChamada.length === 0 ? "" : 
                             <Category>
-                                <p>Segunda Chamada</p>
+                                <h1>Segunda Chamada</h1>
                                 {segChamada.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                         <p>Prova: {test.name}</p>
                                         <p>Professor: {test.teacher.name}</p>
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -246,13 +250,13 @@ export default function SearchSubject(){
 
                         {outras.length === 0 ? "" : 
                             <Category>
-                                <p>Outras</p>
+                                <h1>Outras</h1>
                                 {outras.map((test) => {
                                 return(
-                                    <EachOption id={test.id} onClick={() => openTest(test.link)}>
+                                    <EachTest id={test.id} onClick={() => openTest(test.link)}>
                                         <p>Prova: {test.name}</p>
                                         <p>Professor: {test.teacher.name}</p>
-                                    </EachOption>
+                                    </EachTest>
                                 )
                                 })}
                             </Category>
@@ -281,6 +285,23 @@ const Header = styled.div`
     }
 ` ;
 
+const Title = styled.div`
+    font-family: 'Major Mono Display', monospace;
+    color:white;
+    font-size: 25px;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    margin-left: 10px;
+    margin-top: 38px;
+
+    :hover{
+        cursor: pointer;
+        color: #FFD523;
+    }
+`;
+
+
 const Body = styled.div`
     display: flex;
     margin-top: 30px;
@@ -297,12 +318,39 @@ const List = styled.div`
 const Category = styled.div`
     width: 50%;
     margin-bottom: 10px;
+
+    h1{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 25px;
+    }
 `;
 
-const EachOption = styled.button` 
-    background: white;
-    margin: 7px;
+const EachDiscipline = styled.button` 
+    width: 200px;
+    height: 25px;
+    background: #2B2B2B;
+    color: white;
+    margin: 10px;
+    border-radius: 5px;
+
     :hover{
         cursor: pointer;
+        background: #171717;
+        color: #FFD523;
     }
 ` ;
+
+const EachTest = styled.button`
+    width: 170px;
+    height: 50px;
+    margin-top: 10px;
+    background: #2B2B2B;
+    color: white;
+    border-radius: 5px;
+
+    :hover{
+        cursor: pointer;
+        background: #171717;
+        color: #FFD523;
+    }
+`;

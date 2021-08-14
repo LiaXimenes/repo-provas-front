@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  //baseURL: 'https://repo-provas-back-end.herokuapp.com',
-  baseURL: 'http://localhost:4000'
+  baseURL: 'https://repo-provas-back-end.herokuapp.com',
 });
 

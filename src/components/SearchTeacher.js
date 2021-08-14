@@ -73,7 +73,7 @@ export default function SearchTeacher(){
                     {teachers.map((teacher) => {
                         return (
                         <EachTeacher id={teacher.id} onClick={() => findTestByTeacherId(teacher.id)}>
-                            {teacher.name}
+                            {teacher.name} ({teacher.tests.length})
                         </EachTeacher>
                         )
                     })}
@@ -87,7 +87,8 @@ export default function SearchTeacher(){
                                 {p1.map((test) => {
                                 return(
                                     <EachTest id={test.id} onClick={() => openTest(test.link)} >
-                                    Prova: {test.name}
+                                        <p>Prova: {test.name}</p>
+                                        <p>Disciplina: {test.subject.name}</p>
                                     </EachTest>
                                 )
                                 })}
@@ -100,7 +101,8 @@ export default function SearchTeacher(){
                                 {p2.map((test) => {
                                 return(
                                     <EachTest id={test.id} onClick={() => openTest(test.link)}>
-                                    Prova: {test.name}
+                                        <p>Prova: {test.name}</p>
+                                        <p>Disciplina: {test.subject.name}</p>
                                     </EachTest>
                                 )
                                 })}
@@ -113,7 +115,8 @@ export default function SearchTeacher(){
                                 {p3.map((test) => {
                                 return(
                                     <EachTest id={test.id} onClick={() => openTest(test.link)}>
-                                    Prova: {test.name}
+                                        <p>Prova: {test.name}</p>
+                                        <p>Disciplina: {test.subject.name}</p>
                                     </EachTest>
                                 )
                                 })}
@@ -126,7 +129,8 @@ export default function SearchTeacher(){
                                 {segChamada.map((test) => {
                                 return(
                                     <EachTest id={test.id} onClick={() => openTest(test.link)}>
-                                    Prova: {test.name}
+                                        <p>Prova: {test.name}</p>
+                                        <p>Disciplina: {test.subject.name}</p>
                                     </EachTest>
                                 )
                                 })}
@@ -139,7 +143,8 @@ export default function SearchTeacher(){
                                 {outras.map((test) => {
                                 return(
                                     <EachTest id={test.id} onClick={() => openTest(test.link)}>
-                                    Prova: {test.name}
+                                        <p>Prova: {test.name}</p>
+                                        <p>Disciplina: {test.subject.name}</p>
                                     </EachTest>
                                 )
                                 })}
